@@ -1,103 +1,97 @@
-import React from 'react'
-import FeatureCard from './FeatureCard';
-import Steps from './Steps';
-import { 
-    Brain, 
-    CheckCircle2, 
-    Clock, 
-    FileSpreadsheet,
-    BarChart3,
-    Shield
-} from 'lucide-react';
+import React, { useState } from "react";
+import TeacherUpload from "./TeacherUpload";
+import StudentUpload from "./StudentUpload";
+import Results from "./Results";
+import { motion } from "framer-motion";
 
 function Home() {
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-            {/* Hero Section */}
-            <header className="container mx-auto px-6 py-16 text-center">
-                <div className="mx-auto max-w-4xl">
-                <Brain className="w-16 h-16 mx-auto text-indigo-600 mb-6" />
-                <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                    Intelligent Answer Sheet Evaluation
-                </h1>
-                <p className="text-xl text-gray-600 mb-8">
-                    Automate your grading process with AI-powered accuracy and efficiency.
-                    Save time while ensuring fair and consistent evaluations.
-                </p>
-                <button className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors">
-                    Get Started
-                </button>
-                </div>
-            </header>
+  const [isTeacherUploaded, setIsTeacherUploaded] = useState(false);
+  const [comparisons, setComparisons] = useState(null);
+  const [loading, setLoading] = useState(false); // State for loading overlay
+  const [student_name, setStudentName] = useState(""); // State for student name
+  const [roll_number, setRollNumber] = useState(""); // State for roll number
 
-            {/* Features Grid */}
-            <section className="container mx-auto px-6 py-16">
-                <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                Key Features
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <FeatureCard 
-                    icon={<CheckCircle2 className="w-8 h-8 text-indigo-600" />}
-                    title="Accurate Evaluation"
-                    description="Advanced AI algorithms ensure precise comparison with model answers"
-                />
-                <FeatureCard 
-                    icon={<Clock className="w-8 h-8 text-indigo-600" />}
-                    title="Time-Saving"
-                    description="Reduce grading time by up to 90% with automated processing"
-                />
-                <FeatureCard 
-                    icon={<FileSpreadsheet className="w-8 h-8 text-indigo-600" />}
-                    title="Batch Processing"
-                    description="Evaluate multiple answer sheets simultaneously"
-                />
-                <FeatureCard 
-                    icon={<BarChart3 className="w-8 h-8 text-indigo-600" />}
-                    title="Detailed Analytics"
-                    description="Get comprehensive insights and performance metrics"
-                />
-                <FeatureCard 
-                    icon={<Shield className="w-8 h-8 text-indigo-600" />}
-                    title="Reliable Security"
-                    description="Enterprise-grade security for your sensitive data"
-                />
-                <FeatureCard 
-                    icon={<Brain className="w-8 h-8 text-indigo-600" />}
-                    title="Smart Learning"
-                    description="AI system learns and improves with each evaluation"
-                />
-                </div>
-            </section>
+  /**
+   * Main Home component
+   * @returns {JSX.Element} The rendered Home component
+   */
+  return (
+    <div className="font-roboto text-center min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 p-5 box-border">
+      {/* Header */}
+      <motion.header
+        className="mb-5"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className="text-4xl text-gray-800 font-bold m-0">📝 Answer Sheet Evaluation System</h1>
+        <p className="text-xl text-gray-600 mt-2">Effortlessly evaluate exam papers with accuracy.</p>
+      </motion.header>
 
-            {/* How It Works */}
-            <section className="bg-gray-50 py-16">
-                <div className="container mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                    How It Works
-                </h2>
-                <div className="max-w-3xl mx-auto">
-                    <Steps />
-                </div>
-                </div>
-            </section>
+      {/* Loading Overlay */}
+      {loading && (
+        <motion.div
+          className="fixed inset-0 bg-opacity-50 bg-gray-800 flex justify-center items-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <div className="text-center text-white p-5">
+            <div className="animate-spin border-t-4 border-white rounded-full w-12 h-12 mx-auto mb-3"></div>
+            <p>Processing... Please wait.</p>
+          </div>
+        </motion.div>
+      )}
 
-            {/* CTA Section */}
-            <section className="container mx-auto px-6 py-16 text-center">
-                <div className="bg-indigo-600 rounded-2xl py-12 px-6">
-                <h2 className="text-3xl font-bold text-white mb-4">
-                    Ready to Transform Your Evaluation Process?
-                </h2>
-                <p className="text-indigo-100 mb-8 max-w-2xl mx-auto">
-                    Join thousands of educators who have already automated their grading workflow.
-                    Start saving time and ensuring consistency today.
-                </p>
-                <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Start Free Trial
-                </button>
-                </div>
-            </section>
-        </div>
-    )
+      {/* Main Content */}
+      <motion.div
+        className="max-w-full mx-auto bg-white rounded-xl shadow-md p-5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        {/* Teacher Upload Section */}
+        {!isTeacherUploaded ? (
+          <div className="border-2 border-dashed border-blue-200 p-5 rounded-xl mb-5 hover:bg-blue-50 hover:border-blue-300 transition">
+            <TeacherUpload setIsTeacherUploaded={setIsTeacherUploaded} setLoading={setLoading} />
+          </div>
+        ) : (
+          <>
+            {/* Student Upload Section */}
+            <motion.div
+              className="border-2 border-dashed border-blue-200 p-5 rounded-xl mb-5"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <StudentUpload
+                setComparisons={setComparisons}
+                setLoading={setLoading}
+                setStudentName={setStudentName}
+                setRollNumber={setRollNumber}
+              />
+            </motion.div>
+
+            {/* Results Section */}
+            {comparisons && (
+              <motion.div
+                className="mt-5 p-5 bg-gray-50 rounded-xl shadow-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Results
+                  comparisons={comparisons}
+                  studentName={student_name}
+                  rollNumber={roll_number}
+                />
+              </motion.div>
+            )}
+          </>
+        )}
+      </motion.div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
