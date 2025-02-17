@@ -10,7 +10,6 @@ function Home() {
   const [loading, setLoading] = useState(false); // State for loading overlay
   const [student_name, setStudentName] = useState(""); // State for student name
   const [roll_number, setRollNumber] = useState(""); // State for roll number
-  
 
   /**
    * Main Home component
