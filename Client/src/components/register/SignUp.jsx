@@ -1,14 +1,21 @@
 import { useState } from 'react';
 import { User, Mail, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 export default function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ name, email, password });
+    e.preventDefault()
+    axios.post('http://localhost:5000/users', { name, email, password })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   };
 
   return (
