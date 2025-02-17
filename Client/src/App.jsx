@@ -1,8 +1,24 @@
 import React from 'react'
-
-function App() {
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import RootLayout from './RootLayout'
+import Home from './components/home/Home'
+function App({children}) {
+  let provider = createBrowserRouter([
+    {
+      path: '',
+      element: <RootLayout />,
+      children : [
+        {
+          path : '',
+          element : <Home />
+        }
+      ]
+    }
+  ])
   return (
-    <div className='bg-red-600'>App</div>
+    <RouterProvider router={provider}>
+      {children}
+    </RouterProvider>
   )
 }
 
