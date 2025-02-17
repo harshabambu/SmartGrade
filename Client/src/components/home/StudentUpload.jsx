@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FileCheck } from 'lucide-react';
 import Results from "./Results";
 
 function StudentUpload() {
@@ -8,12 +9,20 @@ function StudentUpload() {
     student_name: "",
     roll_number: "",
   });
+  const [name, setName] = useState(""); // State for student name
+  const [rollNo, setRollNo] = useState(""); // State for roll number
+  const [file, setFile] = useState(null); // State for file upload
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false); // State for overlay effect
 
-  const handleUpload = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData();
+    formData.append("studentName", name);
+    formData.append("rollNumber", rollNo);
+    if (file) {
+      formData.append("pdf", file);
+    }
 
     setLoading(true); // Show overlay
 
@@ -38,48 +47,65 @@ function StudentUpload() {
   };
 
   return (
-    <div className="p-5 space-y-6 font-sans">
-      <h1 className="text-3xl font-semibold text-gray-800">Upload Student Answer Sheet</h1>
-      
-      <form onSubmit={handleUpload} className="space-y-4">
-        <div className="space-y-1">
-          <label className="block font-semibold text-gray-700">Student Name:</label>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            Student Name
+          </label>
           <input
             type="text"
-            name="studentName"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        
-        <div className="space-y-1">
-          <label className="block font-semibold text-gray-700">Roll Number:</label>
+        <div>
+          <label htmlFor="rollNo" className="block text-sm font-medium text-gray-700 mb-1">
+            Roll Number
+          </label>
           <input
             type="text"
-            name="rollNumber"
+            id="rollNo"
+            value={rollNo}
+            onChange={(e) => setRollNo(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+      </div>
 
-        <div className="space-y-1">
-          <label className="block font-semibold text-gray-700">Upload PDF:</label>
+      <div>
+        <label className="block">
+          <div className="flex flex-col items-center justify-center py-6 px-4 border-2 border-dashed border-indigo-300 rounded-lg hover:border-indigo-400 transition-colors cursor-pointer bg-white">
+            <FileCheck className="h-12 w-12 text-indigo-500 mb-4" />
+            <div className="space-y-2 text-center">
+              <p className="text-lg font-medium text-gray-700">
+                {file ? file.name : "Upload Student's Answer Sheet"}
+              </p>
+              <p className="text-sm text-gray-500">PDF or image files up to 10MB</p>
+            </div>
+          </div>
           <input
             type="file"
-            name="pdf"
-            accept=".pdf"
+            className="hidden"
+            accept=".pdf,.png,.jpg,.jpeg"
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-        </div>
+        </label>
+      </div>
 
+      <div className="flex justify-center">
         <button
           type="submit"
-          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
         >
-          Upload
+          Submit for Evaluation
         </button>
-      </form>
+      </div>
 
       {/* Loading Overlay */}
       {loading && (
@@ -99,7 +125,7 @@ function StudentUpload() {
           comparisons={comparisons}
         />
       )}
-    </div>
+    </form>
   );
 }
 
