@@ -1,4 +1,3 @@
-import React from "react";
 import { 
     Brain, 
     Upload,
@@ -9,7 +8,7 @@ import {
     Settings,
     X
   } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
 function Header() {
     return (
         <header className="bg-white border-b">
@@ -20,9 +19,9 @@ function Header() {
                         <span className="text-xl font-semibold">Smart Grade</span>
                     </div>
                     <nav className="hidden md:flex space-x-6">
-                        <a href="#" className="text-gray-600 hover:text-indigo-600">
+                        <Link to={'home'} className="text-gray-600 hover:text-indigo-600">
                         Dashboard
-                        </a>
+                        </Link>
                         <a href="#" className="text-gray-600 hover:text-indigo-600">
                         Evaluations
                         </a>

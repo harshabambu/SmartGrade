@@ -1,9 +1,8 @@
-import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import RootLayout from './RootLayout'
 import Landing from './components/landing/Landing'
 import Home from './components/home/Home'
-function App({children}) {
+function App() {
   let provider = createBrowserRouter([
     {
       path: '',
@@ -21,9 +20,7 @@ function App({children}) {
     }
   ])
   return (
-    <RouterProvider router={provider}>
-      {children}
-    </RouterProvider>
+    <RouterProvider router={provider} />
   )
 }
 
