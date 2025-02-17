@@ -1,15 +1,7 @@
-import React from "react";
 import { 
-    Brain, 
-    Upload,
-    FileText,
-    AlertCircle,
-    CheckCircle2,
-    HelpCircle,
-    Settings,
-    X
+    Brain
   } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
 function Header() {
     return (
         <header className="bg-white border-b">
@@ -20,15 +12,15 @@ function Header() {
                         <span className="text-xl font-semibold">Smart Grade</span>
                     </div>
                     <nav className="hidden md:flex space-x-6">
-                        <a href="#" className="text-gray-600 hover:text-indigo-600">
+                        <Link to={'home'} className="text-gray-600 hover:text-indigo-600">
                         Dashboard
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-indigo-600">
-                        Evaluations
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-indigo-600">
-                        Reports
-                        </a>
+                        </Link>
+                        <Link to={'login'} className="text-gray-600 hover:text-indigo-600">
+                        Login
+                        </Link>
+                        <Link to={'signup'} className="text-gray-600 hover:text-indigo-600">
+                        Sign Up
+                        </Link>
                         <a href="#" className="text-gray-600 hover:text-indigo-600">
                         Settings
                         </a>

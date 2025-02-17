@@ -1,9 +1,10 @@
-import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import RootLayout from './RootLayout'
 import Landing from './components/landing/Landing'
 import Home from './components/home/Home'
-function App({children}) {
+import Login from './components/Login'
+import Signup from './components/SignUp'
+function App() {
   let provider = createBrowserRouter([
     {
       path: '',
@@ -16,14 +17,20 @@ function App({children}) {
         {
           path : '/home',
           element : <Home />
+        },
+        {
+          path : '/login',
+          element : <Login />
+        },
+        {
+          path : '/signup',
+          element : <Signup />
         }
       ]
     }
   ])
   return (
-    <RouterProvider router={provider}>
-      {children}
-    </RouterProvider>
+    <RouterProvider router={provider} />
   )
 }
 
