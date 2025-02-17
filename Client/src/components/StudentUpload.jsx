@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Results from "./Results";
-import "./StudentUpload.css";
 
 function StudentUpload() {
   const [comparisons, setComparisons] = useState({});
@@ -39,33 +38,60 @@ function StudentUpload() {
   };
 
   return (
-    <div className="student-upload">
-      <h1>Upload Student Answer Sheet</h1>
-      <form onSubmit={handleUpload}>
-        <div className="form-group">
-          <label>Student Name:</label>
-          <input type="text" name="studentName" required />
+    <div className="p-5 space-y-6 font-sans">
+      <h1 className="text-3xl font-semibold text-gray-800">Upload Student Answer Sheet</h1>
+      
+      <form onSubmit={handleUpload} className="space-y-4">
+        <div className="space-y-1">
+          <label className="block font-semibold text-gray-700">Student Name:</label>
+          <input
+            type="text"
+            name="studentName"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-        <div className="form-group">
-          <label>Roll Number:</label>
-          <input type="text" name="rollNumber" required />
+        
+        <div className="space-y-1">
+          <label className="block font-semibold text-gray-700">Roll Number:</label>
+          <input
+            type="text"
+            name="rollNumber"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-        <div className="form-group">
-          <label>Upload PDF:</label>
-          <input type="file" name="pdf" accept=".pdf" required />
+
+        <div className="space-y-1">
+          <label className="block font-semibold text-gray-700">Upload PDF:</label>
+          <input
+            type="file"
+            name="pdf"
+            accept=".pdf"
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-        <button type="submit">Upload</button>
+
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Upload
+        </button>
       </form>
 
+      {/* Loading Overlay */}
       {loading && (
-        <div className="overlay">
-          <div className="overlay-content">
-            <h2>Uploading...</h2>
-            <p>Please wait while we process your file.</p>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-lg text-center animate__animated animate__fadeIn animate__faster">
+            <h2 className="text-2xl font-semibold text-gray-800">Uploading...</h2>
+            <p className="text-lg text-gray-600">Please wait while we process your file.</p>
           </div>
         </div>
       )}
 
+      {/* Results Section */}
       {showResults && (
         <Results
           student_name={studentDetails.student_name}
