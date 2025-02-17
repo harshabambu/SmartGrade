@@ -1,12 +1,5 @@
 import { 
-    Brain, 
-    Upload,
-    FileText,
-    AlertCircle,
-    CheckCircle2,
-    HelpCircle,
-    Settings,
-    X
+    Brain
   } from 'lucide-react';
 import { Link } from 'react-router-dom';
 function Header() {
@@ -22,12 +15,12 @@ function Header() {
                         <Link to={'home'} className="text-gray-600 hover:text-indigo-600">
                         Dashboard
                         </Link>
-                        <a href="#" className="text-gray-600 hover:text-indigo-600">
-                        Evaluations
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-indigo-600">
-                        Reports
-                        </a>
+                        <Link to={'login'} className="text-gray-600 hover:text-indigo-600">
+                        Login
+                        </Link>
+                        <Link to={'signup'} className="text-gray-600 hover:text-indigo-600">
+                        Sign Up
+                        </Link>
                         <a href="#" className="text-gray-600 hover:text-indigo-600">
                         Settings
                         </a>
