@@ -97,9 +97,9 @@ function Landing() {
                     Join thousands of educators who have already automated their grading workflow.
                     Start saving time and ensuring consistency today.
                 </p>
-                <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">
+                {/* <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">
                     Start Free Trial
-                </button>
+                </button> */}
                 </div>
             </section>
         </div>

@@ -14,14 +14,14 @@ function Header() {
     })
     return (
         <header className="bg-white border-b">
-            <div className="container mx-auto px-6 py-4">
+            <div className="mx-auto px-6 py-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                         <Brain className="w-8 h-8 text-indigo-600" />
                         <span className="text-2xl font-bold">Smart Grade</span>
                     </div>
                     <nav className="hidden md:flex space-x-20" ref={menuRef}>
-                        <Link to={'home'} className="font-semibold text-lg text-gray-600 hover:text-indigo-600">
+                        {/* <Link to={'home'} className="font-semibold text-lg text-gray-600 hover:text-indigo-600">
                         Dashboard
                         </Link>
                         <Link to={'login'} className="font-semibold text-lg text-gray-600 hover:text-indigo-600">
@@ -29,7 +29,7 @@ function Header() {
                         </Link>
                         <Link to={'signup'} className="font-semibold text-lg text-gray-600 hover:text-indigo-600">
                         Sign Up
-                        </Link>
+                        </Link> */}
                     </nav>
                 </div>
             </div>
