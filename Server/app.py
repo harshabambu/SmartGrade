@@ -20,7 +20,7 @@ app = Flask(__name__)
 CORS(app)
 
 # MongoDB Configuration
-client = MongoClient("")
+client = MongoClient("mongodb://localhost:27017/")
 
 # Download necessary NLTK resources
 nltk.download('punkt')
@@ -33,8 +33,13 @@ stop_words = set(stopwords.words("english"))
 negation_words = {"not", "never", "no", "none", "cannot", "n't"}  # Add more if needed
 
 # SBERT Model for Similarity
+
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 sbert_model = SentenceTransformer("all-MiniLM-L6-v2")
-genai.configure(api_key="")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Cross-Encoder for Contextual Understanding
 cross_encoder_model = AutoModelForSequenceClassification.from_pretrained("cross-encoder/stsb-roberta-large")
